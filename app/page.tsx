@@ -2,9 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import {
-  Activity,
   ArrowRight,
-  Bell,
   CarFront,
   Check,
   ChevronRight,
@@ -17,7 +15,6 @@ import {
   Sparkles,
   TriangleAlert,
   Wind,
-  Wrench,
 } from "lucide-react";
 
 const navigation = [
@@ -176,54 +173,21 @@ export default function Home() {
 
   return (
     <main id="top">
-      <section className="hero">
-        <header className="site-header shell">
+      <header className="top-header">
+        <div className="top-header-inner shell">
           <BrandMark />
           <nav aria-label="주요 메뉴">
             {navigation.map((item) => <a key={item.href} href={item.href}>{item.label}</a>)}
           </nav>
           <a className="nav-cta" href="#early-access">먼저 만나보기 <ArrowRight size={16} /></a>
-        </header>
-
-        <div className="hero-grid shell">
-          <div className="hero-copy">
-            <p className="eyebrow hero-service-label"><span /> 주행데이터 기반 차량 관리 개인화 서비스</p>
-            <h1>내 차를 잘 몰라도,<br /><em>보고타가 알아서</em> 챙깁니다.</h1>
-            <p className="hero-description">내 차의 주행데이터를 바탕으로 소모품 교체 시기부터 경고등 정보, 다음 차량까지 쉽게 알려드려요.</p>
-            <div className="hero-actions">
-              <a className="button primary" href="#early-access">보고타 미리 만나보기 <ArrowRight size={18} /></a>
-              <a className="text-link" href="#features">기능 살펴보기 <ChevronRight size={17} /></a>
-            </div>
-          </div>
-
-          <div className="hero-visual" aria-label="보고타 앱 차량 관리 대시보드 미리보기">
-            <div className="phone-shell">
-              <div className="phone-speaker" />
-              <div className="phone-screen">
-                <div className="app-header"><div><small>안녕하세요, 민수님</small><strong>오늘도 안전운전하세요.</strong></div><span><Bell size={18} /></span></div>
-                <div className="vehicle-hero-card">
-                  <div className="vehicle-meta"><span>MY CAR</span><strong>GENESIS G80</strong><small>18,620 km</small></div>
-                  <div className="car-stage"><span className="car-floor" /><CarFront size={118} strokeWidth={1.1} /></div>
-                  <div className="vehicle-status"><span><i /> 차량 상태</span><strong>아주 좋아요</strong></div>
-                </div>
-                <div className="quick-title"><strong>빠른 메뉴</strong><span>전체보기</span></div>
-                <div className="quick-grid">
-                  <div><span><TriangleAlert size={20} /></span><small>경고등</small></div>
-                  <div><span><Wrench size={20} /></span><small>차량 관리</small></div>
-                  <div><span><CarFront size={20} /></span><small>차량 추천</small></div>
-                </div>
-                <div className="app-health"><div><span><Activity size={17} /></span><p><small>이번 달 카 리포트</small><strong>관리 점수 92점</strong></p></div><ChevronRight size={18} /></div>
-                <div className="phone-home" />
-              </div>
-            </div>
-          </div>
         </div>
-      </section>
+      </header>
 
       <section className="features shell" id="features">
         <div className="features-heading">
           <p className="section-label">WHAT BOGOTA DOES</p>
-          <h2>차를 잘 몰라도 괜찮은<br />세 가지 이유.</h2>
+          <h2>내 차를 잘 몰라도 괜찮은<br />세 가지 이유.</h2>
+          <p className="features-intro">보고타는 내 차의 주행데이터를 바탕으로 어려운 차량 관리를 세 가지 쉬운 기능으로 바꿉니다.</p>
         </div>
 
         {features.map((feature, index) => (
