@@ -188,23 +188,15 @@ export default function Home() {
         <div className="hero-grid shell">
           <div className="hero-copy">
             <p className="eyebrow hero-service-label"><span /> 주행데이터 기반 차량 관리 개인화 서비스</p>
-            <h1>내 차를 잘 몰라도,<br /><em>보고타가 알아서 챙깁니다.</em></h1>
-            <p className="hero-description">보고타는 내 차의 주행거리와 관리 이력을 바탕으로<br className="desktop-break" /> 필요한 소모품 교체 시기와 차량 정보를 쉬운 말로 알려드려요.</p>
+            <h1>내 차를 잘 몰라도,<br /><em>보고타가 알아서</em> 챙깁니다.</h1>
+            <p className="hero-description">내 차의 주행데이터를 바탕으로 소모품 교체 시기부터 경고등 정보, 다음 차량까지 쉽게 알려드려요.</p>
             <div className="hero-actions">
               <a className="button primary" href="#early-access">보고타 미리 만나보기 <ArrowRight size={18} /></a>
-              <a className="text-link" href="#features">어떻게 챙겨주나요? <ChevronRight size={17} /></a>
-            </div>
-            <div className="hero-proof">
-              <div className="avatar-stack" aria-hidden="true"><span>민</span><span>J</span><span>수</span></div>
-              <p><strong>자동차를 몰라도 쉬운 차량 관리</strong><br />보고타와 함께 시작하세요</p>
+              <a className="text-link" href="#features">기능 살펴보기 <ChevronRight size={17} /></a>
             </div>
           </div>
 
           <div className="hero-visual" aria-label="보고타 앱 차량 관리 대시보드 미리보기">
-            <div className="orbit orbit-one" />
-            <div className="orbit orbit-two" />
-            <div className="float-card float-alert"><span><Bell size={17} /></span><div><small>관리 알림</small><strong>엔진오일 교체 D-18</strong></div></div>
-            <div className="float-card float-match"><Sparkles size={18} /><div><small>나와 맞는 차량</small><strong>96% MATCH</strong></div></div>
             <div className="phone-shell">
               <div className="phone-speaker" />
               <div className="phone-screen">
@@ -226,7 +218,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="hero-foot shell"><span>SCROLL TO DISCOVER</span><i /></div>
       </section>
 
       <section className="features shell" id="features">
