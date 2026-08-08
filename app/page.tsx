@@ -47,10 +47,10 @@ const features = [
   {
     number: "03",
     eyebrow: "SMART RECOMMENDATION",
-    title: "어떤 차가 맞는지,\n간단한 질문으로 알 수 있게.",
+    title: "내 주행데이터를 바탕으로,\n잘 맞는 차를 추천하게.",
     description:
-      "예산, 가족 수, 평소 이동 거리를 알려주세요. 어려운 자동차 용어 없이 나에게 잘 맞는 차량을 골라드립니다.",
-    points: ["쉬운 질문으로 내게 맞는 차량 찾기", "추천 이유와 차량별 차이 한눈에 확인"],
+      "보고타가 주행거리, 주로 달리는 도로, 가속과 감속 같은 실제 운전 패턴을 분석해 내 운전 습관에 잘 맞는 차량을 추천합니다. 별도의 설문은 필요하지 않아요.",
+    points: ["추가 질문 없이 주행데이터로 분석", "추천 차량과 그 이유를 한눈에 확인"],
     visual: "recommend",
   },
 ];
@@ -130,8 +130,8 @@ function RecommendPreview() {
     <div className="feature-preview recommend-preview" aria-label="차량 추천 화면 예시">
       <div className="recommend-head">
         <div>
-          <span className="preview-kicker">FOR YOUR LIFESTYLE</span>
-          <strong>민수님을 위한 추천</strong>
+          <span className="preview-kicker">FROM YOUR DRIVING DATA</span>
+          <strong>주행데이터 맞춤 추천</strong>
         </div>
         <Sparkles size={22} />
       </div>
@@ -144,12 +144,12 @@ function RecommendPreview() {
         <div className="match-copy">
           <small>BEST MATCH</small>
           <h3>GENESIS GV70</h3>
-          <p>도심 주행과 주말 레저를 모두 만족하는 균형 잡힌 선택</p>
-          <div className="tag-row"><span>패밀리 SUV</span><span>안전성</span><span>승차감</span></div>
+          <p>도심 주행 비율과 평소 운전 패턴에 잘 맞는 균형 잡힌 선택</p>
+          <div className="tag-row"><span>도심 주행 72%</span><span>평균 주행거리</span><span>부드러운 제동</span></div>
         </div>
       </div>
       <div className="compare-row">
-        <span><b>다른 추천 차량</b><small>조건에 맞는 차량 12대</small></span>
+        <span><b>다른 추천 차량</b><small>주행패턴에 맞는 차량 12대</small></span>
         <span className="mini-car"><CarFront size={23} /></span>
         <span className="mini-car"><CarFront size={23} /></span>
         <button type="button" aria-label="다음 추천 차량 보기"><ArrowRight size={17} /></button>
@@ -257,7 +257,7 @@ export default function Home() {
           <div className="principle-list">
             <div><span><Search size={24} /></span><div><strong>자동차 용어를 몰라도 쉽게</strong><p>처음 듣는 자동차 용어도 바로 이해할 수 있도록 풀어서 설명합니다.</p></div></div>
             <div><span><ShieldCheck size={24} /></span><div><strong>주행한 만큼 알맞게 관리</strong><p>내 차가 실제로 달린 거리와 관리 이력에 맞춰 교체 시기를 알려드립니다.</p></div></div>
-            <div><span><Gauge size={24} /></span><div><strong>내 생활에 맞는 차량 추천</strong><p>복잡한 제원 대신 예산과 생활 방식에 맞는 선택을 도와드립니다.</p></div></div>
+            <div><span><Gauge size={24} /></span><div><strong>주행데이터로 찾는 다음 차</strong><p>실제 운전 습관과 차량 이용 패턴을 바탕으로 다음 선택을 도와드립니다.</p></div></div>
           </div>
         </div>
       </section>
