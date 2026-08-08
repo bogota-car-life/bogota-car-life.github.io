@@ -21,36 +21,36 @@ import {
 } from "lucide-react";
 
 const navigation = [
-  { label: "서비스", href: "#features" },
-  { label: "보고타 이야기", href: "#about" },
+  { label: "기능 소개", href: "#features" },
+  { label: "보고타의 약속", href: "#promise" },
 ];
 
 const features = [
   {
     number: "01",
     eyebrow: "WARNING LIGHT GUIDE",
-    title: "낯선 경고등 앞에서,\n더 이상 당황하지 않도록.",
+    title: "계기판에 켜진 불빛,\n무슨 뜻인지 바로 알게.",
     description:
-      "계기판에 켜진 경고등을 빠르게 찾고, 원인과 위험도, 지금 해야 할 행동까지 한눈에 확인하세요.",
-    points: ["경고등별 원인과 위험도 안내", "상황에 맞는 즉시 대응 가이드"],
+      "처음 보는 표시가 켜져도 걱정하지 마세요. 지금 운전해도 되는지, 무엇을 확인해야 하는지 쉬운 말로 알려드립니다.",
+    points: ["지금 운전해도 되는지 위험도 안내", "정비소에 가기 전 해야 할 일 안내"],
     visual: "warning",
   },
   {
     number: "02",
-    eyebrow: "MY CAR CARE",
-    title: "내 차의 모든 기록을,\n하나의 타임라인으로.",
+    eyebrow: "PERSONALIZED CAR CARE",
+    title: "내 차 소모품,\n교체할 때를 놓치지 않게.",
     description:
-      "소모품 교체부터 정기 점검까지 놓치기 쉬운 차량 일정을 보고타가 먼저 챙겨드려요.",
-    points: ["차량별 맞춤 관리 주기", "정비·소모품 교체 기록 관리"],
+      "차를 잘 몰라도 괜찮아요. 보고타가 내 차의 주행거리와 관리 이력을 살펴 엔진오일, 타이어 같은 소모품의 교체 시기를 알기 쉽게 알려드립니다.",
+    points: ["내 차 주행거리 기준 교체 시기 안내", "엔진오일·타이어 등 소모품 한눈에 관리"],
     visual: "care",
   },
   {
     number: "03",
     eyebrow: "SMART RECOMMENDATION",
-    title: "많이 팔린 차보다,\n나에게 맞는 차를.",
+    title: "어떤 차가 맞는지,\n간단한 질문으로 알 수 있게.",
     description:
-      "예산과 라이프스타일, 선호 조건을 분석해 수많은 선택지 중 가장 나다운 차량을 추천합니다.",
-    points: ["조건별 차량 비교와 추천", "내 취향을 반영한 매치 스코어"],
+      "예산, 가족 수, 평소 이동 거리를 알려주세요. 어려운 자동차 용어 없이 나에게 잘 맞는 차량을 골라드립니다.",
+    points: ["쉬운 질문으로 내게 맞는 차량 찾기", "추천 이유와 차량별 차이 한눈에 확인"],
     visual: "recommend",
   },
 ];
@@ -187,16 +187,16 @@ export default function Home() {
 
         <div className="hero-grid shell">
           <div className="hero-copy">
-            <p className="eyebrow"><span /> YOUR CAR, CLEARLY</p>
-            <h1>차를 아는 순간,<br /><em>운전이 가벼워집니다.</em></h1>
-            <p className="hero-description">알쏭달쏭한 경고등부터 매일의 차량 관리,<br className="desktop-break" /> 다음 차를 고르는 일까지. 보고타가 더 쉬운 카라이프를 만듭니다.</p>
+            <p className="eyebrow hero-service-label"><span /> 주행데이터 기반 차량 관리 개인화 서비스</p>
+            <h1>내 차를 잘 몰라도,<br /><em>보고타가 알아서 챙깁니다.</em></h1>
+            <p className="hero-description">보고타는 내 차의 주행거리와 관리 이력을 바탕으로<br className="desktop-break" /> 필요한 소모품 교체 시기와 차량 정보를 쉬운 말로 알려드려요.</p>
             <div className="hero-actions">
               <a className="button primary" href="#early-access">보고타 미리 만나보기 <ArrowRight size={18} /></a>
-              <a className="text-link" href="#features">무엇이 달라지나요? <ChevronRight size={17} /></a>
+              <a className="text-link" href="#features">어떻게 챙겨주나요? <ChevronRight size={17} /></a>
             </div>
             <div className="hero-proof">
               <div className="avatar-stack" aria-hidden="true"><span>민</span><span>J</span><span>수</span></div>
-              <p><strong>더 쉬운 자동차 생활</strong><br />보고타와 함께 시작하세요</p>
+              <p><strong>자동차를 몰라도 쉬운 차량 관리</strong><br />보고타와 함께 시작하세요</p>
             </div>
           </div>
 
@@ -229,21 +229,10 @@ export default function Home() {
         <div className="hero-foot shell"><span>SCROLL TO DISCOVER</span><i /></div>
       </section>
 
-      <section className="intro" id="about">
-        <div className="shell intro-grid">
-          <p className="section-label">ABOUT BOGOTA</p>
-          <div>
-            <h2>자동차와 사람 사이의<br /><span>복잡함을 덜어냅니다.</span></h2>
-            <p>차에 대해 잘 몰라도 괜찮도록. 보고타는 필요한 정보를 가장 쉬운 언어로 전달하고, 매 순간 더 나은 선택을 돕습니다.</p>
-          </div>
-        </div>
-        <div className="marquee" aria-hidden="true"><span>KNOW YOUR CAR&nbsp;&nbsp;·&nbsp;&nbsp; ENJOY YOUR DRIVE&nbsp;&nbsp;·&nbsp;&nbsp; KNOW YOUR CAR&nbsp;&nbsp;·&nbsp;&nbsp; ENJOY YOUR DRIVE</span></div>
-      </section>
-
       <section className="features shell" id="features">
         <div className="features-heading">
           <p className="section-label">WHAT BOGOTA DOES</p>
-          <h2>차를 타는 모든 순간에<br />필요한 세 가지.</h2>
+          <h2>차를 잘 몰라도 괜찮은<br />세 가지 이유.</h2>
         </div>
 
         {features.map((feature, index) => (
@@ -262,13 +251,13 @@ export default function Home() {
         ))}
       </section>
 
-      <section className="principles">
+      <section className="principles" id="promise">
         <div className="shell principle-grid">
           <div className="principle-lead"><p className="section-label light">BOGOTA PROMISE</p><h2>어렵지 않게.<br />놓치지 않게.<br /><span>내 차답게.</span></h2></div>
           <div className="principle-list">
-            <div><span><Search size={24} /></span><div><strong>쉽고 정확한 정보</strong><p>어려운 자동차 용어를 누구나 이해하기 쉽게 설명합니다.</p></div></div>
-            <div><span><ShieldCheck size={24} /></span><div><strong>놓치지 않는 관리</strong><p>내 차에 꼭 필요한 관리 시점을 먼저 알려드립니다.</p></div></div>
-            <div><span><Gauge size={24} /></span><div><strong>나를 위한 선택</strong><p>유행보다 사용자의 생활과 취향을 먼저 생각합니다.</p></div></div>
+            <div><span><Search size={24} /></span><div><strong>자동차 용어를 몰라도 쉽게</strong><p>처음 듣는 자동차 용어도 바로 이해할 수 있도록 풀어서 설명합니다.</p></div></div>
+            <div><span><ShieldCheck size={24} /></span><div><strong>주행한 만큼 알맞게 관리</strong><p>내 차가 실제로 달린 거리와 관리 이력에 맞춰 교체 시기를 알려드립니다.</p></div></div>
+            <div><span><Gauge size={24} /></span><div><strong>내 생활에 맞는 차량 추천</strong><p>복잡한 제원 대신 예산과 생활 방식에 맞는 선택을 도와드립니다.</p></div></div>
           </div>
         </div>
       </section>
@@ -294,7 +283,7 @@ export default function Home() {
       </section>
 
       <footer>
-        <div className="shell footer-inner"><BrandMark /><p>차를 아는 가장 쉬운 방법</p><span>© 2026 BOGOTA. ALL RIGHTS RESERVED.</span></div>
+        <div className="shell footer-inner"><BrandMark /><p>주행데이터 기반 차량 관리 개인화 서비스</p><span>© 2026 BOGOTA. ALL RIGHTS RESERVED.</span></div>
       </footer>
     </main>
   );

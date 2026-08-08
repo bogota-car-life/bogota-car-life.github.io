@@ -13,11 +13,23 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "보고타 BOGOTA | 차를 아는 가장 쉬운 방법",
-  description: "차량 경고등, 차량 관리, 차량 추천까지. 더 쉬운 카라이프를 만드는 보고타를 만나보세요.",
+  metadataBase: new URL("https://bogota-car-life.minseong0213.chatgpt.site"),
+  title: "보고타 BOGOTA | 주행데이터 기반 차량 관리 개인화 서비스",
+  description: "차를 잘 몰라도 괜찮아요. 내 차의 주행거리와 관리 이력을 바탕으로 소모품 교체 시기와 차량 정보를 쉽게 알려주는 보고타를 만나보세요.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
+  },
+  openGraph: {
+    title: "보고타 BOGOTA | 주행데이터 기반 차량 관리 개인화 서비스",
+    description: "내 차를 잘 몰라도, 보고타가 알아서 챙깁니다.",
+    images: [{ url: "/og.png", width: 1734, height: 907, alt: "보고타 서비스 소개" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "보고타 BOGOTA | 주행데이터 기반 차량 관리 개인화 서비스",
+    description: "내 차를 잘 몰라도, 보고타가 알아서 챙깁니다.",
+    images: ["/og.png"],
   },
 };
 
