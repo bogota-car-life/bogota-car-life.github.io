@@ -24,6 +24,7 @@ const navigation = [
 
 const features = [
   {
+    id: "warning",
     number: "01",
     eyebrow: "WARNING LIGHT GUIDE",
     title: "계기판에 켜진 불빛,\n무슨 뜻인지 바로 알게.",
@@ -33,6 +34,7 @@ const features = [
     visual: "warning",
   },
   {
+    id: "care",
     number: "02",
     eyebrow: "PERSONALIZED CAR CARE",
     title: "내 차 소모품,\n교체할 때를 놓치지 않게.",
@@ -42,6 +44,7 @@ const features = [
     visual: "care",
   },
   {
+    id: "recommend",
     number: "03",
     eyebrow: "SMART RECOMMENDATION",
     title: "내 주행데이터를 바탕으로,\n잘 맞는 차를 추천하게.",
@@ -186,12 +189,33 @@ export default function Home() {
       <section className="features shell" id="features">
         <div className="features-heading">
           <p className="section-label">WHAT BOGOTA DOES</p>
-          <h2>내 차를 잘 몰라도 괜찮은<br />세 가지 이유.</h2>
-          <p className="features-intro">보고타는 내 차의 주행데이터를 바탕으로 어려운 차량 관리를 세 가지 쉬운 기능으로 바꿉니다.</p>
+          <h2>내 차를 가장<br />잘 아는 앱.</h2>
+          <p className="features-intro">보고타는 내 차의 주행데이터를 바탕으로, 자동차를 잘 몰라도 필요한 정보와 관리 시점을 놓치지 않게 도와드립니다.</p>
+        </div>
+
+        <div className="feature-overview" aria-label="보고타 주요 기능">
+          <a className="overview-card dark" href="#feature-warning">
+            <span className="overview-number">01</span>
+            <span className="overview-icon"><TriangleAlert size={24} /></span>
+            <div><h3>경고등 해석</h3><p>계기판 불빛의 뜻과 지금 해야 할 일을 알려드려요.</p></div>
+            <ChevronRight size={19} className="overview-arrow" />
+          </a>
+          <a className="overview-card mint" href="#feature-care">
+            <span className="overview-number">02</span>
+            <span className="overview-icon"><Droplets size={24} /></span>
+            <div><h3>소모품 관리</h3><p>내 주행거리에 맞춰 교체 시기를 먼저 알려드려요.</p></div>
+            <ChevronRight size={19} className="overview-arrow" />
+          </a>
+          <a className="overview-card lime" href="#feature-recommend">
+            <span className="overview-number">03</span>
+            <span className="overview-icon"><CarFront size={24} /></span>
+            <div><h3>차량 추천</h3><p>실제 주행 습관을 분석해 잘 맞는 차를 찾아드려요.</p></div>
+            <ChevronRight size={19} className="overview-arrow" />
+          </a>
         </div>
 
         {features.map((feature, index) => (
-          <article className={`feature-row ${index % 2 === 1 ? "reverse" : ""}`} key={feature.number}>
+          <article className={`feature-row ${index % 2 === 1 ? "reverse" : ""}`} id={`feature-${feature.id}`} key={feature.number}>
             <div className="feature-copy">
               <span className="feature-number">{feature.number}</span>
               <p className="feature-eyebrow">{feature.eyebrow}</p>
