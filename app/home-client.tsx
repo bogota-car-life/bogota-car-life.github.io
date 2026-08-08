@@ -2,26 +2,25 @@
 
 import { useState, type FormEvent } from "react";
 import {
+  Activity,
   ArrowRight,
+  Bluetooth,
   CarFront,
   Check,
   ChevronRight,
-  CircleGauge,
-  Droplets,
+  Database,
   Gauge,
   Mail,
-  Search,
-  ShieldCheck,
-  Sparkles,
+  ReceiptText,
+  Route,
+  ScanLine,
   TriangleAlert,
-  Wind,
   Wrench,
 } from "lucide-react";
 
-const navigation = [
-  { label: "기능 소개", href: "#features" },
-  { label: "보고타의 약속", href: "#promise" },
-];
+const navigation = [{ label: "기능 소개", href: "#features" }];
+
+const emailDomains = ["gmail.com", "naver.com", "kakao.com", "daum.net", "hanmail.net", "outlook.com"];
 
 const features = [
   {
@@ -38,10 +37,10 @@ const features = [
     id: "care",
     number: "02",
     eyebrow: "PERSONALIZED CAR CARE",
-    title: "내 차 소모품,\n교체할 때를 놓치지 않게.",
+    title: "내 주행습관에 맞춰,\n소모품을 더 알맞게.",
     description:
-      "차를 잘 몰라도 괜찮아요. 보고타가 내 차의 주행거리와 관리 이력을 살펴 엔진오일, 타이어 같은 소모품의 교체 시기를 알기 쉽게 알려드립니다.",
-    points: ["내 차 주행거리 기준 교체 시기 안내", "엔진오일·타이어 등 소모품 한눈에 관리"],
+      "같은 거리를 달려도 차에 주는 부담은 운전마다 다릅니다. 보고타가 급가속, 고회전, 도심 주행 같은 실제 주행데이터를 분석해 소모품별 교체 주기를 내 차에 맞게 조정합니다.",
+    points: ["괜찮은 소모품은 몇 % 더 사용 가능한지 안내", "부담이 큰 소모품은 교체 시기를 더 일찍 안내"],
     visual: "care",
   },
   {
@@ -68,58 +67,99 @@ function WarningPreview() {
   return (
     <div className="feature-preview warning-preview" aria-label="차량 경고등 관리 화면 예시">
       <div className="preview-topline">
-        <div>
-          <span className="preview-kicker">경고등 진단</span>
-          <strong>어떤 표시가 켜졌나요?</strong>
-        </div>
-        <span className="preview-icon-button"><Search size={18} /></span>
+        <strong>OBD 경고 진단</strong>
+        <span className="preview-icon-button"><Bluetooth size={18} /></span>
       </div>
-      <div className="warning-focus">
-        <span className="warning-symbol"><TriangleAlert size={34} strokeWidth={1.8} /></span>
-        <div>
-          <span className="danger-label">주의가 필요해요</span>
-          <h3>타이어 공기압 경고</h3>
-          <p>안전한 곳에 정차 후 타이어 상태를 확인하세요.</p>
-        </div>
-        <button type="button" aria-label="자세히 보기"><ChevronRight size={19} /></button>
+
+      <div className="warning-scan-strip">
+        <span><ScanLine size={21} /></span>
+        <strong>경고 3개를 발견했어요</strong>
+        <em>진단 완료</em>
       </div>
-      <div className="warning-grid">
-        <div><span><Droplets size={20} /></span><p>엔진 오일</p><small>정상</small></div>
-        <div className="active"><span><CircleGauge size={20} /></span><p>타이어</p><small>확인 필요</small></div>
-        <div><span><Wind size={20} /></span><p>냉각 장치</p><small>정상</small></div>
+
+      <div className="warning-selected">
+        <span><TriangleAlert size={27} /></span>
+        <strong>엔진 경고등</strong>
+        <em>점검 필요</em>
+      </div>
+
+      <div className="warning-cause-list">
+        <div className="warning-cause active">
+          <span className="cause-rank">1순위</span>
+          <div><small>가장 가능성 높은 원인</small><strong>점화 코일 성능 저하</strong></div>
+          <div className="cause-estimate"><ReceiptText size={18} /><span>예상 수리비</span><b>20~30만원</b></div>
+        </div>
+        <div className="warning-cause compact">
+          <span className="cause-rank">2순위</span>
+          <strong>점화 플러그 마모</strong>
+        </div>
+        <div className="warning-cause compact">
+          <span className="cause-rank">3순위</span>
+          <strong>연료 인젝터 분사 불량</strong>
+        </div>
       </div>
     </div>
   );
 }
 
 function CarePreview() {
+  const careItems = [
+    {
+      name: "엔진오일",
+      standard: "10,000km",
+      personalized: "11,200km",
+      adjustment: "+12% 더 사용",
+      tone: "extend",
+    },
+    {
+      name: "브레이크 패드",
+      standard: "40,000km",
+      personalized: "42,800km",
+      adjustment: "+7% 더 사용",
+      tone: "extend",
+    },
+    {
+      name: "에어컨 필터",
+      standard: "10,000km",
+      personalized: "9,200km",
+      adjustment: "8% 일찍 교체",
+      tone: "sooner",
+    },
+  ];
+
   return (
-    <div className="feature-preview care-preview" aria-label="차량 관리 화면 예시">
-      <div className="car-summary">
+    <div className="feature-preview care-preview" aria-label="주행데이터 기반 개인화 소모품 관리 화면 예시">
+      <div className="care-personal-head">
         <div>
-          <span className="preview-kicker">MY GARAGE</span>
-          <strong>GENESIS G80</strong>
-          <small>2024 · 가솔린 · 18,620 km</small>
+          <strong>내 주행스타일 분석 완료</strong>
+          <small>최근 주행데이터 842km 반영</small>
         </div>
-        <div className="score-ring"><span>92</span><small>GOOD</small></div>
+        <div className="care-profile-badge"><Activity size={18} /><b>안정형 운전</b></div>
       </div>
-      <div className="care-stats">
-        <div><span>다음 점검</span><strong>D-18</strong></div>
-        <div><span>이번 달 주행</span><strong>842<small>km</small></strong></div>
-        <div><span>관리 항목</span><strong>7<small>개</small></strong></div>
+
+      <div className="care-style-result">
+        <Gauge size={21} />
+        <strong>차량 부담이 적은 주행이에요</strong>
       </div>
-      <div className="timeline-card">
-        <div className="timeline-head"><strong>다가오는 관리</strong><span>전체 보기</span></div>
-        <div className="timeline-item">
-          <span className="date-box"><b>08</b><small>AUG</small></span>
-          <span className="timeline-dot" />
-          <div><strong>엔진오일 교체</strong><small>권장 주기까지 620km</small></div>
-          <span className="status-pill">예정</span>
+
+      <div className="personal-care-panel">
+        <div className="personal-care-title">
+          <div><Wrench size={18} /><strong>개인화된 소모품 교체 주기</strong></div>
         </div>
-        <div className="timeline-item muted">
-          <span className="date-box"><b>26</b><small>SEP</small></span>
-          <span className="timeline-dot" />
-          <div><strong>정기 안전 점검</strong><small>보고타가 미리 알려드려요</small></div>
+        <div className="personal-care-list">
+          {careItems.map((item) => (
+            <div className="personal-care-item" key={item.name}>
+              <div className="care-item-top">
+                <strong>{item.name}</strong>
+                <span className={`care-adjustment ${item.tone}`}>{item.adjustment}</span>
+              </div>
+              <div className="care-cycle-row">
+                <span>일반 <s>{item.standard}</s></span>
+                <ArrowRight size={11} />
+                <b>내 차 {item.personalized}</b>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -127,34 +167,37 @@ function CarePreview() {
 }
 
 function RecommendPreview() {
+  const recommendations = [
+    { rank: 1, model: "현대 코나 HEV", reason: "도심 연비 · 정차-출발 대응", score: "91.4" },
+    { rank: 2, model: "현대 아이오닉 6 SR", reason: "전비 효율 · 부드러운 가속", score: "87.8" },
+    { rank: 3, model: "기아 니로 HEV", reason: "도심 주행 · 실용성", score: "84.6" },
+  ];
+
   return (
     <div className="feature-preview recommend-preview" aria-label="차량 추천 화면 예시">
       <div className="recommend-head">
-        <div>
-          <span className="preview-kicker">FROM YOUR DRIVING DATA</span>
-          <strong>주행데이터 맞춤 추천</strong>
-        </div>
-        <Sparkles size={22} />
+        <strong>주행데이터 맞춤 추천</strong>
+        <span><Database size={20} /></span>
       </div>
-      <div className="match-card">
-        <div className="match-visual">
-          <span className="car-glow" />
-          <CarFront size={92} strokeWidth={1.25} />
-          <span className="match-badge"><b>96</b>% MATCH</span>
-        </div>
-        <div className="match-copy">
-          <small>BEST MATCH</small>
-          <h3>GENESIS GV70</h3>
-          <p>도심 주행 비율과 평소 운전 패턴에 잘 맞는 균형 잡힌 선택</p>
-          <div className="tag-row"><span>도심 주행 72%</span><span>평균 주행거리</span><span>부드러운 제동</span></div>
-        </div>
+
+      <div className="recommend-data-result">
+        <Route size={19} />
+        <strong>240개 주행 기록 분석 완료</strong>
       </div>
-      <div className="compare-row">
-        <span><b>다른 추천 차량</b><small>주행패턴에 맞는 차량 12대</small></span>
-        <span className="mini-car"><CarFront size={23} /></span>
-        <span className="mini-car"><CarFront size={23} /></span>
-        <button type="button" aria-label="다음 추천 차량 보기"><ArrowRight size={17} /></button>
+
+      <div className="recommend-ranking">
+        {recommendations.map((vehicle) => (
+          <div className={`recommend-rank ${vehicle.rank === 1 ? "top" : ""}`} key={vehicle.rank}>
+            <span className="recommend-rank-number">{vehicle.rank}위</span>
+            <div>
+              <strong>{vehicle.model}</strong>
+              <small>{vehicle.reason}</small>
+            </div>
+            <b>{vehicle.score}<small>점</small></b>
+          </div>
+        ))}
       </div>
+
     </div>
   );
 }
@@ -166,12 +209,14 @@ function FeatureVisual({ type }: { type: string }) {
 }
 
 export default function Home() {
-  const [email, setEmail] = useState("");
+  const [emailId, setEmailId] = useState("");
+  const [emailDomain, setEmailDomain] = useState("gmail.com");
   const [submitted, setSubmitted] = useState(false);
+  const fullEmail = `${emailId.trim()}@${emailDomain.trim()}`;
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!email.trim()) return;
+    if (!emailId.trim() || !emailDomain.trim()) return;
     setSubmitted(true);
   }
 
@@ -204,7 +249,7 @@ export default function Home() {
           <a className="overview-card mint" href="#feature-care">
             <span className="overview-number">02</span>
             <span className="overview-icon"><Wrench size={23} /></span>
-            <div><h3>소모품 관리</h3><p>내 주행거리에 맞춰 교체 시기를 먼저 알려드려요.</p></div>
+            <div><h3>개인화 소모품 관리</h3><p>주행습관을 분석해 소모품별 교체 주기를 맞춰드려요.</p></div>
             <ChevronRight size={19} className="overview-arrow" />
           </a>
           <a className="overview-card lime" href="#feature-recommend">
@@ -231,34 +276,35 @@ export default function Home() {
         ))}
       </section>
 
-      <section className="principles" id="promise">
-        <div className="shell principle-grid">
-          <div className="principle-lead"><p className="section-label light">BOGOTA PROMISE</p><h2>어렵지 않게.<br />놓치지 않게.<br /><span>내 차답게.</span></h2></div>
-          <div className="principle-list">
-            <div><span><Search size={24} /></span><div><strong>자동차 용어를 몰라도 쉽게</strong><p>처음 듣는 자동차 용어도 바로 이해할 수 있도록 풀어서 설명합니다.</p></div></div>
-            <div><span><ShieldCheck size={24} /></span><div><strong>주행한 만큼 알맞게 관리</strong><p>내 차가 실제로 달린 거리와 관리 이력에 맞춰 교체 시기를 알려드립니다.</p></div></div>
-            <div><span><Gauge size={24} /></span><div><strong>주행데이터로 찾는 다음 차</strong><p>실제 운전 습관과 차량 이용 패턴을 바탕으로 다음 선택을 도와드립니다.</p></div></div>
-          </div>
-        </div>
-      </section>
-
       <section className="early-access" id="early-access">
-        <div className="early-glow" />
         <div className="shell early-inner">
-          <p className="eyebrow centered"><span /> BE THE FIRST TO DRIVE</p>
-          <h2>보고타를 가장 먼저<br /><em>만나보세요.</em></h2>
-          <p>이메일을 남겨주시면 출시 소식과 사전 체험 안내를 보내드릴게요.</p>
-          {submitted ? (
-            <div className="success-message" role="status"><span><Check size={22} /></span><div><strong>신청이 완료되었습니다.</strong><small>{email}로 가장 먼저 소식을 전해드릴게요.</small></div></div>
-          ) : (
-            <form className="email-form" onSubmit={handleSubmit}>
-              <label htmlFor="email" className="sr-only">이메일 주소</label>
-              <span><Mail size={20} /></span>
-              <input id="email" name="email" type="email" autoComplete="email" required placeholder="이메일 주소를 입력해주세요" value={email} onChange={(event) => setEmail(event.target.value)} />
-              <button type="submit">사전 체험 신청 <ArrowRight size={18} /></button>
-            </form>
-          )}
-          <small className="privacy-note">입력하신 이메일은 보고타 출시 안내 외 용도로 사용하지 않습니다.</small>
+          <div className="early-copy">
+            <p className="section-label">EARLY ACCESS</p>
+            <h2>보고타 소식을<br /><em>가장 먼저 받아보세요.</em></h2>
+            <p>출시 일정과 사전 체험 안내를 입력하신 이메일로 보내드릴게요.</p>
+          </div>
+          <div className="early-form-panel">
+            {submitted ? (
+              <div className="success-message" role="status"><span><Check size={22} /></span><div><strong>신청이 완료되었습니다.</strong><small>{fullEmail}로 가장 먼저 소식을 전해드릴게요.</small></div></div>
+            ) : (
+              <form className="email-form" onSubmit={handleSubmit}>
+                <div className="email-entry">
+                  <span className="email-icon"><Mail size={19} /></span>
+                  <label htmlFor="email-id" className="sr-only">이메일 아이디</label>
+                  <input id="email-id" name="email-id" type="text" autoComplete="username" required pattern="[A-Za-z0-9._%+-]+" placeholder="이메일 아이디" value={emailId} onChange={(event) => setEmailId(event.target.value)} />
+                  <span className="email-at">@</span>
+                  <label htmlFor="email-domain" className="sr-only">이메일 도메인</label>
+                  <select id="email-domain" name="email-domain" className="email-domain-select" required value={emailDomain} onChange={(event) => setEmailDomain(event.target.value)}>
+                    {emailDomains.map((domain) => (
+                      <option value={domain} key={domain}>{domain}</option>
+                    ))}
+                  </select>
+                </div>
+                <button type="submit">사전 체험 신청 <ArrowRight size={18} /></button>
+              </form>
+            )}
+            <small className="privacy-note">입력하신 이메일은 보고타 출시 안내 외 용도로 사용하지 않습니다.</small>
+          </div>
         </div>
       </section>
 
