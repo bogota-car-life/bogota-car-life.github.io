@@ -29,13 +29,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "보고타 BOGOTA | 주행데이터 기반 차량 관리 개인화 서비스",
     description: "내 차를 잘 몰라도, 보고타가 알아서 챙깁니다.",
-    images: [{ url: `${publicBasePath}/og.png`, width: 1734, height: 907, alt: "보고타 서비스 소개" }],
+    images: [{ url: `${publicBasePath}/og-blue-v2.png`, width: 1731, height: 909, alt: "보고타 주행데이터 기반 차량 관리 개인화 서비스" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "보고타 BOGOTA | 주행데이터 기반 차량 관리 개인화 서비스",
     description: "내 차를 잘 몰라도, 보고타가 알아서 챙깁니다.",
-    images: [`${publicBasePath}/og.png`],
+    images: [`${publicBasePath}/og-blue-v2.png`],
   },
 };
 
