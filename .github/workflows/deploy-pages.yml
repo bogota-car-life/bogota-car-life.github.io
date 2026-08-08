@@ -35,11 +35,6 @@ jobs:
         env:
           GITHUB_PAGES: "true"
 
-      - name: Normalize project-site asset paths
-        run: |
-          cp -R dist/client/bogota-car-life/. dist/client/
-          rm -rf dist/client/bogota-car-life
-
       - name: Disable Jekyll processing
         run: touch dist/client/.nojekyll
 

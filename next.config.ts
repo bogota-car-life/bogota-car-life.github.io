@@ -6,7 +6,6 @@ const nextConfig: NextConfig = {
   ...(isGitHubPages
     ? {
         output: "export",
-        assetPrefix: "/bogota-car-life/",
         trailingSlash: true,
       }
     : {}),

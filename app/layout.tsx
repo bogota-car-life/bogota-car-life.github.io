@@ -3,9 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 const isGitHubPages = process.env.GITHUB_PAGES === "true";
-const publicBasePath = isGitHubPages ? "/bogota-car-life" : "";
+const publicBasePath = "";
 const siteUrl = isGitHubPages
-  ? "https://minseong0213.github.io/bogota-car-life"
+  ? "https://bogota-car-life.github.io"
   : "https://bogota-car-life.minseong0213.chatgpt.site";
 
 const geistSans = Geist({
