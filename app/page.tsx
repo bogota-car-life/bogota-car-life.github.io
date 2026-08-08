@@ -189,7 +189,7 @@ export default function Home() {
       <section className="features shell" id="features">
         <div className="features-heading">
           <p className="section-label">WHAT BOGOTA DOES</p>
-          <h2>내 차를 가장<br />잘 아는 앱.</h2>
+          <h2>내 차를 가장 잘 아는 앱.</h2>
           <p className="features-intro">보고타는 내 차의 주행데이터를 바탕으로, 자동차를 잘 몰라도 필요한 정보와 관리 시점을 놓치지 않게 도와드립니다.</p>
         </div>
 

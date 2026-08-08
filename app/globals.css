@@ -43,7 +43,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .features-heading h2, .principle-lead h2 { margin: 0; font-size: clamp(38px, 4.4vw, 62px); line-height: 1.23; letter-spacing: -.06em; }
 
 .features { padding: 105px 0 80px; }
-.features-heading { max-width: 760px; }.features-heading .section-label { margin-bottom: 24px; }.features-heading h2 { font-size: clamp(42px, 4.6vw, 66px); }
+.features-heading { max-width: 980px; }.features-heading .section-label { margin-bottom: 24px; }.features-heading h2 { font-size: clamp(42px, 4.6vw, 66px); white-space: nowrap; }
 .features-intro { max-width: 600px; margin: 28px 0 0; color: #68716e; font-size: 16px; line-height: 1.8; }
 .feature-overview { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 68px; }
 .overview-card { min-height: 230px; padding: 25px; display: flex; flex-direction: column; position: relative; overflow: hidden; border-radius: 26px; transition: transform .2s ease, box-shadow .2s ease; }
@@ -81,7 +81,7 @@ footer { padding: 36px 0; color: white; background: #091310; border-top: 1px sol
 @media (max-width: 640px) {
   .shell { width: min(100% - 32px, 1180px); }
   .top-header-inner { height: 72px; }.top-header nav { display: none; }.nav-cta { padding: 10px 13px; font-size: 11px; }
-  .features-heading h2, .principle-lead h2 { font-size: 37px; }
+  .features-heading h2, .principle-lead h2 { font-size: 37px; }.features-heading h2 { white-space: normal; }
   .features { padding-top: 76px; }.features-intro { font-size: 14px; }.feature-row, .feature-row.reverse { padding: 95px 0; gap: 45px; }.feature-copy { padding-left: 0; }.feature-number { position: static; display: block; margin-bottom: 28px; }.feature-copy h3 { font-size: 32px; }.feature-description { font-size: 14px; }
   .feature-overview { grid-template-columns: 1fr; gap: 10px; margin-top: 48px; }.overview-card { min-height: 180px; padding: 22px; }.overview-icon { margin-top: 18px; }.overview-arrow { right: 22px; bottom: 22px; }
   .feature-preview { height: auto; min-height: 470px; padding: 22px; border-radius: 26px; }.warning-focus { grid-template-columns: auto 1fr; padding: 18px; }.warning-focus button { display: none; }.warning-symbol { width: 52px; height: 52px; }.warning-grid { gap: 7px; }.warning-grid > div { height: 155px; padding: 14px; }.warning-grid p { font-size: 10px; }.care-preview { min-height: 440px; }.care-stats div { padding: 11px; }.timeline-card { padding: 16px; }.timeline-item { grid-template-columns: 40px 7px 1fr; }.status-pill { display: none; }.recommend-preview { min-height: 480px; }.match-visual { height: 170px; }.compare-row .mini-car:nth-of-type(3) { display: none; }
