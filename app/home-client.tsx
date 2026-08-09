@@ -8,7 +8,6 @@ import {
   CarFront,
   Check,
   ChevronRight,
-  Database,
   Gauge,
   Mail,
   ReceiptText,
@@ -50,7 +49,7 @@ const features = [
     title: "내 주행데이터를 바탕으로,\n잘 맞는 차를 추천하게.",
     description:
       "보고타가 주행거리, 주로 달리는 도로, 가속과 감속 같은 실제 운전 패턴을 분석해 내 운전 습관에 잘 맞는 차량을 추천합니다. 별도의 설문은 필요하지 않아요.",
-    points: ["추가 질문 없이 주행데이터로 분석", "추천 차량과 그 이유를 한눈에 확인"],
+    points: ["추천 차량과 그 이유를 한눈에 확인", "주행데이터로 운전성향과 주행스타일 분석"],
     visual: "recommend",
   },
 ];
@@ -78,9 +77,9 @@ function WarningPreview() {
       </div>
 
       <div className="warning-selected">
-        <span><TriangleAlert size={27} /></span>
+        <span><img src="/engine-warning-icon.png" alt="" /></span>
         <strong>엔진 경고등</strong>
-        <em>점검 필요</em>
+        <em>노란색 경고등 : 빠른 시일 내 점검</em>
       </div>
 
       <div className="warning-cause-list">
@@ -167,37 +166,35 @@ function CarePreview() {
 }
 
 function RecommendPreview() {
-  const recommendations = [
-    { rank: 1, model: "현대 코나 HEV", reason: "도심 연비 · 정차-출발 대응", score: "91.4" },
-    { rank: 2, model: "현대 아이오닉 6 SR", reason: "전비 효율 · 부드러운 가속", score: "87.8" },
-    { rank: 3, model: "기아 니로 HEV", reason: "도심 주행 · 실용성", score: "84.6" },
-  ];
-
   return (
     <div className="feature-preview recommend-preview" aria-label="차량 추천 화면 예시">
       <div className="recommend-head">
         <strong>주행데이터 맞춤 추천</strong>
-        <span><Database size={20} /></span>
       </div>
 
-      <div className="recommend-data-result">
-        <Route size={19} />
-        <strong>240개 주행 기록 분석 완료</strong>
+      <div className="recommend-best">
+        <div className="recommend-car-visual">
+          <img src="/kona-recommendation.png" alt="현대 코나 HEV" />
+        </div>
+        <div className="recommend-best-copy">
+          <span>1위 추천</span>
+          <div><strong>현대 코나 HEV</strong><b>91.4<small>점</small></b></div>
+          <p>도심 연비 · 정차-출발 대응 · HEV 추천</p>
+        </div>
       </div>
 
-      <div className="recommend-ranking">
-        {recommendations.map((vehicle) => (
-          <div className={`recommend-rank ${vehicle.rank === 1 ? "top" : ""}`} key={vehicle.rank}>
-            <span className="recommend-rank-number">{vehicle.rank}위</span>
-            <div>
-              <strong>{vehicle.model}</strong>
-              <small>{vehicle.reason}</small>
-            </div>
-            <b>{vehicle.score}<small>점</small></b>
-          </div>
-        ))}
+      <div className="recommend-insights">
+        <div>
+          <div className="recommend-insight-title"><Activity size={17} /><strong>운전자 성향</strong></div>
+          <span>부드러운 가속 성향</span>
+          <span>급가속·급제동 적음</span>
+        </div>
+        <div>
+          <div className="recommend-insight-title"><Route size={17} /><strong>주행 스타일</strong></div>
+          <span>도심·저속 주행 중심</span>
+          <span>짧은 거리 이동</span>
+        </div>
       </div>
-
     </div>
   );
 }
@@ -234,7 +231,7 @@ export default function Home() {
 
       <section className="features shell" id="features">
         <div className="features-heading">
-          <p className="section-label">WHAT BOGOTA DOES</p>
+          <img className="features-logo" src="/bogota-logo.png" alt="BOGOTA" />
           <h2>내 차를 가장 잘 아는 앱.</h2>
           <p className="features-intro">보고타는 내 차의 주행데이터를 바탕으로, 자동차를 잘 몰라도 필요한 정보와 관리 시점을 놓치지 않게 도와드립니다.</p>
         </div>
@@ -280,7 +277,7 @@ export default function Home() {
         <div className="shell early-inner">
           <div className="early-copy">
             <p className="section-label">EARLY ACCESS</p>
-            <h2>보고타 소식을<br /><em>가장 먼저 받아보세요.</em></h2>
+            <h2>앱스토어 출시 전,<br /><em>먼저 사용해보기</em></h2>
             <p>출시 일정과 사전 체험 안내를 입력하신 이메일로 보내드릴게요.</p>
           </div>
           <div className="early-form-panel">
