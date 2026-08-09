@@ -209,12 +209,35 @@ export default function Home() {
   const [emailId, setEmailId] = useState("");
   const [emailDomain, setEmailDomain] = useState("gmail.com");
   const [submitted, setSubmitted] = useState(false);
-  const fullEmail = `${emailId.trim()}@${emailDomain.trim()}`;
+  const [privacyAgreed, setPrivacyAgreed] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formError, setFormError] = useState("");
+  const fullEmail = `${emailId.trim()}@${emailDomain.trim()}`.toLowerCase();
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!emailId.trim() || !emailDomain.trim()) return;
-    setSubmitted(true);
+    if (!emailId.trim() || !emailDomain.trim() || !privacyAgreed || isSubmitting) return;
+
+    setIsSubmitting(true);
+    setFormError("");
+
+    try {
+      const { saveWaitlistSignup } = await import("./firebase");
+      await saveWaitlistSignup(fullEmail, window.location.href);
+      setSubmitted(true);
+    } catch (error) {
+      const errorCode = typeof error === "object" && error !== null && "code" in error
+        ? String(error.code)
+        : "";
+
+      if (errorCode === "permission-denied") {
+        setSubmitted(true);
+      } else {
+        setFormError("신청을 저장하지 못했습니다. 잠시 후 다시 시도해주세요.");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -285,22 +308,29 @@ export default function Home() {
               <div className="success-message" role="status"><span><Check size={22} /></span><div><strong>신청이 완료되었습니다.</strong><small>{fullEmail}로 가장 먼저 소식을 전해드릴게요.</small></div></div>
             ) : (
               <form className="email-form" onSubmit={handleSubmit}>
-                <div className="email-entry">
-                  <span className="email-icon"><Mail size={19} /></span>
-                  <label htmlFor="email-id" className="sr-only">이메일 아이디</label>
-                  <input id="email-id" name="email-id" type="text" autoComplete="username" required pattern="[A-Za-z0-9._%+-]+" placeholder="이메일 아이디" value={emailId} onChange={(event) => setEmailId(event.target.value)} />
-                  <span className="email-at">@</span>
-                  <label htmlFor="email-domain" className="sr-only">이메일 도메인</label>
-                  <select id="email-domain" name="email-domain" className="email-domain-select" required value={emailDomain} onChange={(event) => setEmailDomain(event.target.value)}>
-                    {emailDomains.map((domain) => (
-                      <option value={domain} key={domain}>{domain}</option>
-                    ))}
-                  </select>
+                <div className="email-form-row">
+                  <div className="email-entry">
+                    <span className="email-icon"><Mail size={19} /></span>
+                    <label htmlFor="email-id" className="sr-only">이메일 아이디</label>
+                    <input id="email-id" name="email-id" type="text" autoComplete="username" required pattern="[A-Za-z0-9._%+-]+" placeholder="이메일 아이디" value={emailId} onChange={(event) => setEmailId(event.target.value)} />
+                    <span className="email-at">@</span>
+                    <label htmlFor="email-domain" className="sr-only">이메일 도메인</label>
+                    <select id="email-domain" name="email-domain" className="email-domain-select" required value={emailDomain} onChange={(event) => setEmailDomain(event.target.value)}>
+                      {emailDomains.map((domain) => (
+                        <option value={domain} key={domain}>{domain}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <button type="submit" disabled={isSubmitting}>{isSubmitting ? "저장 중..." : "사전 체험 신청"} {!isSubmitting && <ArrowRight size={18} />}</button>
                 </div>
-                <button type="submit">사전 체험 신청 <ArrowRight size={18} /></button>
+                <label className="privacy-consent">
+                  <input type="checkbox" required checked={privacyAgreed} onChange={(event) => setPrivacyAgreed(event.target.checked)} />
+                  <span>출시·사전 체험 안내를 위한 이메일 수집 및 이용에 동의합니다.</span>
+                </label>
+                {formError && <p className="form-error" role="alert">{formError}</p>}
               </form>
             )}
-            <small className="privacy-note">입력하신 이메일은 보고타 출시 안내 외 용도로 사용하지 않습니다.</small>
+            <small className="privacy-note">입력하신 이메일은 보고타 출시 안내 외 용도로 사용하지 않으며, 안내 종료 후 3개월 이내 삭제합니다.</small>
           </div>
         </div>
       </section>
